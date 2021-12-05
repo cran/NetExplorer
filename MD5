@@ -1,6 +1,6 @@
-f7d0115279333dcaffa03a11f2cdda03 *DESCRIPTION
+cac4372f9c8d6a95bf66742d9fb7758d *DESCRIPTION
 df390c53434517b304ac5db487184641 *NAMESPACE
-11b95bafa6e8eca5e9c09fd95c9dbde7 *R/Functions.R
+217d5d67d761ae0c03b7d610e159d4e5 *R/Functions.R
 4c1f114f1a517c8d29403976e7f5897c *R/df.R
 ac054a14d859b5b7bef54f9d8fe0d485 *R/matrix.R
 e7e35ba7983b273852c9c4d874a01baa *data/data_frame.RData
@@ -9,7 +9,7 @@ e7e35ba7983b273852c9c4d874a01baa *data/data_frame.RData
 63b96f3295318b311ac08d0ad70b64dd *inst/www/d3.min.js
 04218703bfad9f5dfd62868b269d9e49 *inst/www/logo.jpg
 4cca9c66bbdcf68b451dc6f40fe42b2f *inst/www/patron.html
-dd33df099bd20ba039d2db13bb6eb194 *inst/www/patron1.txt
+a65e55242de07763ae736299e1bb71e4 *inst/www/patron1.txt
 4ae2b40834f6c1f8cd5c150655f388c6 *inst/www/patron2.txt
 21ccbb5fa6aa5bee17e7f848c7afc551 *inst/www/save.png
 00d9aefd57ab46718f3c22db39cb3b5f *inst/www/style.css

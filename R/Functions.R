@@ -18,7 +18,6 @@
 #' @param M a square adjacency matrix.
 #' @param sym if \emph{TRUE}, it extracts the lower triangle of the matrix only.
 #' @param erase.diag if \emph{TRUE}, it omits diagonals.
-#' @details This function convert a matrix into an edgelist.
 #' @return a data frame representing an edge list.
 #' @author Sebastian Sosa
 #' @keywords internal
@@ -108,8 +107,7 @@ df.col.findId <- function(df, label_name) {
 #' @param col.att an integer indicating the column with which to create the gradient
 #' @param color a character vector of length two indicating the starting point of the gradient and the ending point of the gradiant
 #' @param  new.col.name a string indicating the gradient column name added to argument df
-#' @return a data frame.
-#' @details argument df with an additional column corresponding to the gradient column based on argument att.
+#' @return argument df with an addiditional column corresponding to the gradient column based on argument att.
 #' @keywords internal
 colorize <- function(df, col.att, color, new.col.name){
   colfunc <- grDevices::colorRampPalette(color)
@@ -129,8 +127,6 @@ colorize <- function(df, col.att, color, new.col.name){
 #' @title Specify shapes according to a column in a data frame
 #' @param vec a  vector
 #' @param char a character vector
-#' @return a numeric vector.
-#' @details Converts a character vector into a numeric vector.
 #' @keywords internal
 shape <- function(vec, char){
   if(length(unique(vec)) > 7){stop("We don't have more than 7 node shapes to propose. Sorry...")}
@@ -149,7 +145,6 @@ shape <- function(vec, char){
   if(any(is.na(vec2))){stop("One of the symboles declared in argument char is not supported")}
   return(vec2)
 }
-
 # Function to prepare data of node attributes to html---------------------------
 #' @title specifies shapes according to a column in a data frame
 #' @param df a data frame with node information.
@@ -163,8 +158,6 @@ shape <- function(vec, char){
 #' @param col.strokeCol a character or numeric vector indicating the column name or index of node stroke color.
 #' @param col.stroke a character or numeric vector indicating the column name or index of node stroke.
 #' @param node.opacity a character or numeric vector indicating the column name or index of node opacity.
-#' @details format a data frame with informations relative to vis.net function.
-#' @return a data frame.
 #' @keywords internal
 vis.net.format.att <- function(df,
                                col.id = NULL, col.size = NULL,
@@ -311,9 +304,9 @@ vis.net.format.att <- function(df,
 #' @param node.opacity a character or numeric vector indicating the column name or index of node opacity.
 #' @param link.opacity a character or numeric vector indicating the column name or index of link opacity.
 #' @param background a character indicating the background color.
-#' @return Opens default web browser with the ploted network.
-#' @details Opens default web browser and shows 'NetExplorer' interface with the desired network.
-#' Further information and tutorial can be found in my video https://youtu.be/IcFTZWCTO_s/
+#' @return Opens default web browser.
+#' @details Opens default web browser and shows NetExplorer interface with the desired network.
+#' Further information and tutorial can be found in my videos https://www.s-sosa.com/
 #' @author Sebastian Sosa
 #' @examples
 #' vis.net(df,m,col.id = "id", col.size = "strength",
@@ -322,7 +315,7 @@ vis.net.format.att <- function(df,
 #' col.stroke = "degree",
 #' col.shape =  "sex",shapes = c("circle", "triangle"),
 #' layers =  "kinship")
-
+#' @seealso https://www.s-sosa.com
 vis.net <- function(df, m,
                     col.id = NULL, col.size = NULL,
                     color = c("black", "white"), col.color = NULL,
@@ -408,9 +401,18 @@ vis.net <- function(df, m,
 
   # Exporting data to html file -----------------
   # Create a temporary directory
-  tempdir <- paste(system.file(package = "NetExplorer"),"/","www", sep = "")
+  tempdir <- tempfile()
+  dir.create(tempdir)
+
+  # Get files from package
+  libDir <- paste(system.file(package = "NetExplorer"),"/","www", sep = "")
+  list_of_files <- list.files(path = libDir)
+
+  # Copy them to the temporary directory
+  file.copy(file.path(libDir,list_of_files), tempdir)
   tmpFile <- file.path(tempdir,  'patron1.txt')
   file.copy(tmpFile, paste0(tempdir,"/NetExplorer.html"), overwrite = TRUE)
+
   tmpFile <- file.path(tempdir,  'NetExplorer.html')
   cat(paste0('\n','\'',noquote('id : '), '\'',noquote('+ d.id ')),file = tmpFile, append = TRUE)
   if(!is.na(d[[2]][2])){
